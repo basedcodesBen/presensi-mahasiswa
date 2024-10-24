@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('nik', 7)->unique();  // Pastikan kolom nik bersifat unique
+            $table->string('nama', 255);
+            $table->string('email', 255)->unique();
+            $table->string('password', 255);
+            $table->unsignedBigInteger('role_id');
+            $table->string('program_studi_id', 2);
+            $table->foreign('role_id')->references('id')->on('role');
+            $table->foreign('program_studi_id')->references('id')->on('program_studi');
             $table->timestamps();
+            $table->rememberToken();
         });
     }
 
