@@ -31,12 +31,12 @@ Before running this project, make sure you have the following installed on your 
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/laravel-attendance-system.git
+   git clone https://github.com/basedcodesBen/presensi-mahasiswa.git
    ```
 
 2. **Navigate to the project folder:**
    ```bash
-   cd laravel-attendance-system
+   cd presensi-mahasiswa
    ```
 
 3. **Install the dependencies:**
