@@ -64,8 +64,12 @@ Before running this project, make sure you have the following installed on your 
    ```bash
    php artisan migrate
    ```
+8. **Seed Database:**
+   ```bash
+   php artisan db:seed
+   ```
 
-8. **Run the development server:**
+10. **Run the development server:**
    ```bash
    php artisan serve
    ```
