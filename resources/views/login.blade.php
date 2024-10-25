@@ -85,7 +85,7 @@
     <div class="login-card">
         <h3 class="login-header">Login</h3>
         <p class="login-description">Enter your NIK and password to sign in</p>
-        <form method="POST" action="{{route('login.post')}}">
+        <form method="POST" action="{{ route('login.post') }}">
             @csrf  <!-- Tambahkan token CSRF -->
             <input type="text" name="nik" class="form-control" placeholder="NIK" required>
             <input type="password" name="password" class="form-control" placeholder="Password" required>
@@ -95,6 +95,15 @@
             </div>
             <button type="submit" class="btn btn-primary w-100">Sign in</button>
         </form>
+        @if($errors->any())
+            <div class="alert alert-danger mt-3">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
 </div>
 

@@ -19,4 +19,14 @@ class User extends Authenticatable
         'role_id',
         'program_studi_id'
     ];
+
+    public function isAdmin()
+    {
+        return $this->role_id == 1;
+    }
+
+    public function isDosen()
+    {
+        return $this->role_id == 2;
+    }
 }

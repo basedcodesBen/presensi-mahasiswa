@@ -19,31 +19,31 @@ class Controller extends BaseController
         return view('login');
     }
 
+    // Fungsi untuk memproses login
     public function userLogin(Request $request)
     {
-//        $user = User::where('nrp', $request->input('nrp'))->where('password', $request->input('password'))->first();
-        $result = Auth::attempt([
-            'nik' => $request->input('nik'),
-            'password' => $request->input('password')
-        ]);
+        $credentials = $request->only('nik', 'password');
 
-        if ($result) {
-            Session::regenerate();
-            \Log::info('User role: '.Auth::user()['role_id']); // Logging role
-            if (Auth::user()['role_id'] == 1) {
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            \Log::info('User role: ' . Auth::user()->role_id); // Logging role
+            if (Auth::user()->role_id == 1) {
                 \Log::info('Redirect to admin.index'); // Tambahkan log
                 return redirect()->route('admin.index');
-            } else if (Auth::user()['role_id'] === 2) {
-                return redirect('/dosen');
+            } else if (Auth::user()->role_id == 2) {
+                \Log::info('Redirect to dosen.index');
+                return redirect()->route('dosen.index');
+            } else {
+                \Log::info('Redirect to user.index');
+                return redirect()->route('user.index');
             }
-            return redirect('/user');
         } else {
-            return back()->withInput()->withErrors(['error' => 'Password salah']);
+            return back()->withInput()->withErrors(['error' => 'NIK atau Password salah']);
         }
-
     }
 
-
+    // Fungsi untuk logout
     public function logout(Request $request)
     {
         Auth::logout();
@@ -55,19 +55,18 @@ class Controller extends BaseController
     // Halaman Admin
     public function adminPage()
     {
-        \Log::info('Admin Page function called');
         return view('admin.index');
     }
 
     // Halaman Dosen
     public function dosenPage()
     {
-        return view('dosen.dashboard');  // Menggunakan layout master
+        return view('dosen.index');
     }
 
     // Halaman User
     public function userPage()
     {
-        return view('user.dashboard');  // Menggunakan layout master
+        return view('user.index');
     }
 }
