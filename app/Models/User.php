@@ -6,13 +6,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    // Tentukan bahwa tabel yang digunakan adalah 'user'
     protected $table = 'users';
 
-    // Jika Anda menggunakan kolom 'nik', pastikan kolom ini bisa diisi
     protected $fillable = [
         'id',
-        'nik',  // Kolom nik di tabel user
+        'nik',
         'nama',
         'email',
         'password',
@@ -28,5 +26,15 @@ class User extends Authenticatable
     public function isDosen()
     {
         return $this->role_id == 2;
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id'); // Ensure this relationship is correct
+    }
+
+    public function programStudi()
+    {
+        return $this->belongsTo(ProgramStudi::class, 'program_studi_id'); // Adjust 'program_studi_id' as per your foreign key
     }
 }
