@@ -9,9 +9,8 @@ class Matakuliah extends Model
 {
     protected $table = 'mata_kuliah';
 
-    // Jika Anda menggunakan kolom 'nik', pastikan kolom ini bisa diisi
     protected $fillable = [
-        'id_matakukiah',
+        'id_matakuliah',
         'nama_matakuliah',
         'kelas',
         'sks'
