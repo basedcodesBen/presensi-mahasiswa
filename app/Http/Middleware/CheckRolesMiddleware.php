@@ -9,14 +9,18 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CheckRolesMiddleware
 {
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, string $role): Response
     {
         if (Auth::check()) {
             $user = Auth::user();
-            if ($user->isAdmin() || $user->isDosen()) {
+            // Check if the user has the required role
+            if (($role === 'admin' && $user->isAdmin()) || 
+                ($role === 'dosen' && $user->isDosen()) || 
+                ($role === 'user' && $user->isUser())) {
                 return $next($request);
             }
         }
-        return redirect('/');
+        // Redirect unauthorized users to the home page instead of logout
+        return redirect('/')->with('error', 'Unauthorized access');
     }
 }

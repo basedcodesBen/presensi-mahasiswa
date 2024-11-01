@@ -26,6 +26,14 @@ class UserTableSeeder extends Seeder
                 'program_studi_id' => '1', // Contoh program studi
             ],
             [
+                'nik' => 'qwe',
+                'nama' => 'Admin User',
+                'email' => 'qwe@example.com',
+                'password' => Hash::make('qwe'), // Password harus di-hash
+                'role_id' => 1, // Role Admin
+                'program_studi_id' => '1', // Contoh program studi
+            ],
+            [
                 'nik' => '2345678',
                 'nama' => 'Dosen User',
                 'email' => 'dosen@example.com',
@@ -34,10 +42,26 @@ class UserTableSeeder extends Seeder
                 'program_studi_id' => '2', // Contoh program studi
             ],
             [
+                'nik' => 'asd',
+                'nama' => 'Dosen User',
+                'email' => 'asd@example.com',
+                'password' => Hash::make('asd'), // Password harus di-hash
+                'role_id' => 2, // Role Dosen
+                'program_studi_id' => '2', // Contoh program studi
+            ],
+            [
                 'nik' => '3456789',
                 'nama' => 'Mahasiswa User',
                 'email' => 'mahasiswa@example.com',
                 'password' => Hash::make('password'), // Password harus di-hash
+                'role_id' => 3, // Role Mahasiswa
+                'program_studi_id' => '3', // Contoh program studi
+            ],
+            [
+                'nik' => '123',
+                'nama' => 'Mahasiswa User',
+                'email' => '123@example.com',
+                'password' => Hash::make('123'), // Password harus di-hash
                 'role_id' => 3, // Role Mahasiswa
                 'program_studi_id' => '3', // Contoh program studi
             ],
