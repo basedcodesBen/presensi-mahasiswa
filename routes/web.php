@@ -36,9 +36,9 @@ Route::middleware(['checkRoles:admin'])->group(function () {
 // Route Dosen
 Route::middleware(['checkRoles:dosen'])->group(function () {
     Route::get('/dosen', [Controller::class, 'dosenPage'])->name('dosen.index');
+    Route::get('/dosen/Matakuliah',[DosenController::class, 'index'])->name('dosen.matakuliah');
 });
 
 Route::middleware(['checkRoles:user'])->group(function () {
     Route::get('/user', [Controller::class, 'userPage'])->name('user.index');
-    Route::get('/dosen/Matakuliah',[DosenController::class, 'index'])->name('dosen.matakuliah');
 });
