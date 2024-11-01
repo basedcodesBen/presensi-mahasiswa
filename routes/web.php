@@ -14,4 +14,5 @@ Route::middleware(['checkRoles'])->group(function () {
     Route::get('/admin', [Controller::class, 'adminPage'])->name('admin.index');
     Route::get('/dosen', [Controller::class, 'dosenPage'])->name('dosen.index');
     Route::get('/user', [Controller::class, 'userPage'])->name('user.index');
+    Route::get('/dosen/Matakuliah',[MatakuliahController::class, 'index'])->name('dosen.matakuliah');
 });
