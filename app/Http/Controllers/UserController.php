@@ -93,23 +93,16 @@ class UserController extends Controller
 
     public function indexDosen(Request $request)
     {
-        $keyword = $request->input('q');
-        $dosens = User::where('role_id', 2); // Asumsikan role_id '2' adalah untuk dosen
-
-        if ($keyword) {
-            $dosens->where(function ($query) use ($keyword) {
-                $query->where('nama', 'like', "%$keyword%")
-                    ->orWhere('nik', 'like', "%$keyword%"); // Gunakan 'nik' sebagai pengganti 'nidn'
-            });
-        }
-
+        $dosens = User::where('role_id', 2);
         $dosens = $dosens->paginate(10);
         return view('admin.dosen.index', compact('dosens'));
     }
 
     public function createDosen()
     {
-        return view('admin.dosen.create'); 
+        $programStudis = ProgramStudi::all();
+
+        return view('admin.dosen.create', compact('programStudis')); 
     }
 
     public function storeDosen(Request $request)
@@ -122,6 +115,7 @@ class UserController extends Controller
             'nik' => 'required|unique:users',
             'nama' => 'required',
             'email' => 'required|email|unique:users',
+            'program_studi_id' => 'required',
         ]);
 
         User::create([
@@ -130,29 +124,44 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make('Dosen123'),
             'role_id' => '2',
-            'program_studi_id' => '3',
+            'program_studi_id' => $request->program_studi_id,
         ]);
 
         return redirect()->route('admin.dosen.index')->with('success', 'Dosen created successfully.');
     }
 
-    public function editDosen(Dosen $dosen)
+    public function editDosen(User $dosen)
     {
-        return view('admin.dosen.edit', compact('dosen')); 
+        $programStudis = ProgramStudi::all();
+        return view('admin.dosen.edit', compact('dosen', 'programStudis')); 
     }
 
-    public function updateDosen(Request $request, Dosen $dosen)
+    public function updateDosen(Request $request, $id)
     {
-        $request->validate([
-            'nidn' => 'required|unique:dosens,nidn,' . $dosen->id,
-            'nama' => 'required',
-            // ... validasi lainnya ...
+        Log::info('Updating dosen', [
+            'request_data' => $request->all(),
+            'dosen_id' => $id
         ]);
 
-        $dosen->update($request->all());
+        $dosen = User::findOrFail($id);
 
-        return redirect()->route('dosen.index')->with('success', 'Dosen updated successfully.');
+        $request->validate([
+            'nik' => 'required|unique:users,nik,' . $dosen->id,
+            'nama' => 'required',
+            'email' => 'required|email|unique:users,email,' . $dosen->id,
+            'program_studi_id' => 'required|exists:program_studi,id',
+        ]);
+
+        $dosen->update([
+            'nik' => $request->nik,
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'program_studi_id' => $request->program_studi_id,
+        ]);
+
+        return redirect()->route('admin.dosen.index')->with('success', 'Dosen updated successfully.');
     }
+
 
     public function destroyDosen($id)
     {
@@ -161,4 +170,85 @@ class UserController extends Controller
         Log::info('Dosen deleted, redirecting to index');
         return redirect()->route('admin.dosen.index')->with('success', 'Dosen deleted successfully.');
     }
+
+    public function indexMahasiswa(Request $request)
+    {
+        $students = User::with('programStudi.fakultas')
+                    ->where('role_id', '3')
+                    ->paginate(10);
+        return view('admin.mahasiswa.index', compact(var_name: 'students'));
+    }
+
+    public function createMahasiswa()
+    {
+        $programStudis = ProgramStudi::all();
+
+        return view('admin.mahasiswa.create', compact('programStudis')); 
+    }
+
+    public function storeMahasiswa(Request $request)
+    {
+        Log::info('Storing new mahasiswa', [
+            'request_data' => $request->all()
+        ]);
+        
+        $request->validate([
+            'nik' => 'required|unique:users',
+            'nama' => 'required',
+            'email' => 'required|email|unique:users',
+            'program_studi_id' => 'required',
+        ]);
+
+        User::create([
+            'nik' => $request->nik,
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'password' => Hash::make('Mahasiswa123'),
+            'role_id' => '3',
+            'program_studi_id' => $request->program_studi_id,
+        ]);
+
+        return redirect()->route('admin.mahasiswa.index')->with('success', 'Mahasiswa created successfully.');
+    }
+
+    public function editMahasiswa(User $mahasiswa)
+    {
+        $programStudis = ProgramStudi::all();
+        return view('admin.mahasiswa.edit', compact('mahasiswa', 'programStudis')); 
+    }
+
+    public function updateMahasiswa(Request $request, $id)
+    {
+        Log::info('Updating dosen', [
+            'request_data' => $request->all(),
+            'dosen_id' => $id
+        ]);
+
+        $mahasiswa = User::findOrFail($id);
+
+        $request->validate([
+            'nik' => 'required|unique:users,nik,' . $mahasiswa->id,
+            'nama' => 'required',
+            'email' => 'required|email|unique:users,email,' . $mahasiswa->id,
+            'program_studi_id' => 'required|exists:program_studi,id',
+        ]);
+
+        $mahasiswa->update([
+            'nik' => $request->nik,
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'program_studi_id' => $request->program_studi_id,
+        ]);
+
+        return redirect()->route('admin.mahasiswa.index')->with('success', 'Mahasiswa updated successfully.');
+    }
+
+    public function destroyMahasiswa($id)
+    {
+        $mahasiswa = User::findOrFail($id);
+        $mahasiswa->delete();
+        Log::info('Mahasiswa deleted, redirecting to index');
+        return redirect()->route('admin.mahasiswa.index')->with('success', 'Mahasiswa deleted successfully.');
+    }
+
 }

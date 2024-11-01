@@ -1,29 +1,29 @@
 @extends('layouts.master')
 
-@section('title', 'Create Dosen')
+@section('title', 'Create mahasiswa')
 
 @section('content')
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="m-0">Data Dosen</h4>
-                    <p>Edit data dosen disini</p>
+                    <h4 class="m-0">Data Mahasiswa</h4>
+                    <p>Edit data Mahasiswa disini</p>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.dosen.store') }}" method="POST">
+                    <form action="{{ route('admin.mahasiswa.store') }}" method="POST">
                         @csrf
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('admin.dosen.index') }}" class="btn btn-secondary me-2">Cancel</a>
+                            <a href="{{ route('admin.mahasiswa.index') }}" class="btn btn-secondary me-2">Cancel</a>
                             <button type="submit" class="btn btn-primary">Add</button>
                         </div>
                         <div class="mb-3">
-                            <label for="nik" class="form-label">Kode Dosen</label>
-                            <input type="text" class="form-control" id="nik" name="nik" placeholder="Enter Kode Dosen" required>
+                            <label for="nik" class="form-label">Kode mahasiswa</label>
+                            <input type="text" class="form-control" id="nik" name="nik" placeholder="Enter Kode mahasiswa" required>
                         </div>
                         <div class="mb-3">
-                            <label for="nama" class="form-label">Nama Dosen</label>
-                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Enter Nama Dosen" required>
+                            <label for="nama" class="form-label">Nama mahasiswa</label>
+                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Enter Nama mahasiswa" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>

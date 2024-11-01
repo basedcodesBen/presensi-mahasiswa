@@ -35,6 +35,6 @@ class User extends Authenticatable
 
     public function programStudi()
     {
-        return $this->belongsTo(ProgramStudi::class, 'id'); // Ensure this relationship is correct
+        return $this->belongsTo(ProgramStudi::class, 'program_studi_id'); // Adjust 'program_studi_id' as per your foreign key
     }
 }
