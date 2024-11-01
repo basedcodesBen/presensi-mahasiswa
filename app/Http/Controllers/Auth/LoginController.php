@@ -26,8 +26,23 @@ class LoginController extends Controller
 
         // Attempt to authenticate the user using 'nik' and 'password'
         if (Auth::attempt(['nik' => $request->nik, 'password' => $request->password], $request->filled('remember'))) {
+            \Log::info('Login Berhasil');
             // Authentication passed, redirect to the intended page
-            return redirect()->intended(route('dashboard'));
+            if (Auth::check()) {
+                $role = Auth::user()->role_id;
+
+                // Redirect based on user role
+                if ($role == 1) {
+                    return redirect()->route('admin.index');  // Admin page
+                } elseif ($role == 2) {
+                    return redirect()->route('dosen.page');   // Dosen page
+                } else {
+                    return redirect()->route('user.page');    // User page
+                }
+            }
+
+            // If not authenticated, redirect to login page
+            return redirect()->route('login');
         }
 
         // Authentication failed, return with errors

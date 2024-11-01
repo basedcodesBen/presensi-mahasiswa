@@ -13,7 +13,7 @@ class CreateDhmdDetailTable extends Migration
             $table->string('user_nik', 7);
             $table->string('status', 100);
             $table->foreign('dhmd_idpresensi')->references('idpresensi')->on('dhmd');
-            $table->foreign('user_nik')->references('nik')->on('user');
+            $table->foreign('user_nik')->references('nik')->on('users');
             $table->timestamps();
         });
     }

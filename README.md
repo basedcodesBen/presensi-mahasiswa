@@ -31,12 +31,12 @@ Before running this project, make sure you have the following installed on your 
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/laravel-attendance-system.git
+   git clone https://github.com/basedcodesBen/presensi-mahasiswa.git
    ```
 
 2. **Navigate to the project folder:**
    ```bash
-   cd laravel-attendance-system
+   cd presensi-mahasiswa
    ```
 
 3. **Install the dependencies:**
@@ -64,8 +64,12 @@ Before running this project, make sure you have the following installed on your 
    ```bash
    php artisan migrate
    ```
+8. **Seed Database:**
+   ```bash
+   php artisan db:seed
+   ```
 
-8. **Run the development server:**
+10. **Run the development server:**
    ```bash
    php artisan serve
    ```

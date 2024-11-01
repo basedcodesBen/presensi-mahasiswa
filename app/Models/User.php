@@ -2,29 +2,39 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    protected $table = 'users';
 
     protected $fillable = [
-        'nik', 'nama', 'email', 'password', 'role_id', 'program_studi_id'
+        'id',
+        'nik',
+        'nama',
+        'email',
+        'password',
+        'role_id',
+        'program_studi_id'
     ];
 
-    protected $hidden = ['password'];
+    public function isAdmin()
+    {
+        return $this->role_id == 1;
+    }
+
+    public function isDosen()
+    {
+        return $this->role_id == 2;
+    }
 
     public function role()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Role::class, 'role_id'); // Ensure this relationship is correct
     }
 
     public function programStudi()
     {
-        return $this->belongsTo(ProgramStudi::class);
+        return $this->belongsTo(ProgramStudi::class, 'program_studi_id'); // Adjust 'program_studi_id' as per your foreign key
     }
 }
