@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             ProgramStudiTableSeeder::class,
             RoleTableSeeder::class,
             UserTableSeeder::class,// Seeder User
+            MatkulSeeder::class
         ]);
     }
 }

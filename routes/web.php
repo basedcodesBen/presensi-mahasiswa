@@ -1,7 +1,6 @@
 <?php
-
 // In routes/web.php
-
+use App\Http\Controllers\DosenController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -41,4 +40,5 @@ Route::middleware(['checkRoles:dosen'])->group(function () {
 
 Route::middleware(['checkRoles:user'])->group(function () {
     Route::get('/user', [Controller::class, 'userPage'])->name('user.index');
+    Route::get('/dosen/Matakuliah',[DosenController::class, 'index'])->name('dosen.matakuliah');
 });
