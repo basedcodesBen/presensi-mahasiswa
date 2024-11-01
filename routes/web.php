@@ -16,12 +16,22 @@ Route::post('/logout', [Controller::class, 'logout'])->name('logout');
 // Route Admin
 Route::middleware(['checkRoles:admin'])->group(function () {
     Route::get('/admin', [Controller::class, 'adminPage'])->name('admin.index');
+
+    // Route Dosen Management
     Route::get('/admin/dosen', [UserController::class, 'indexDosen'])->name('admin.dosen.index');
     Route::get('/admin/dosen/create', [UserController::class, 'createDosen'])->name('admin.dosen.create');
     Route::post('/admin/dosen', [UserController::class, 'storeDosen'])->name('admin.dosen.store');
-    Route::get('/admin/dosen/{dosen}/edit', [UserController::class, 'editDosen'])->name('dosen.edit');
-    Route::put('/admin/dosen/{dosen}', [UserController::class, 'updateDosen'])->name('dosen.update');
+    Route::get('/admin/dosen/{dosen}/edit', [UserController::class, 'editDosen'])->name('admin.dosen.edit');
+    Route::put('/admin/dosen/{dosen}', [UserController::class, 'updateDosen'])->name('admin.dosen.update');
     Route::delete('/admin/dosen/{id}', [UserController::class, 'destroyDosen'])->name('admin.dosen.destroy'); 
+    
+    // Route Mahasiswa Management
+    Route::get('/admin/mahasiswa', [UserController::class, 'indexMahasiswa'])->name('admin.mahasiswa.index');
+    Route::get('/admin/mahasiswa/create', [UserController::class, 'createMahasiswa'])->name('admin.mahasiswa.create');
+    Route::post('/admin/mahasiswa', [UserController::class, 'storeMahasiswa'])->name('admin.mahasiswa.store');
+    Route::get('/admin/mahasiswa/{mahasiswa}/edit', [UserController::class, 'editMahasiswa'])->name('admin.mahasiswa.edit');
+    Route::put('/admin/mahasiswa/{mahasiswa}', [UserController::class, 'updateMahasiswa'])->name('admin.mahasiswa.update');
+    Route::delete('/admin/mahasiswa/{id}', [UserController::class, 'destroyMahasiswa'])->name('admin.mahasiswa.destroy'); 
 });
 
 // Route Dosen
