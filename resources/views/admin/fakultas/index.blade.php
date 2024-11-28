@@ -17,7 +17,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th class="text-center">ID</th>
+                                    <th class="text-center">No</th>
                                     <th>Nama Fakultas</th>
                                     <th>Program Studi</th>
                                     <th>Aksi</th>
@@ -26,7 +26,7 @@
                             <tbody>
                                 @foreach ($faculties as $faculty)
                                     <tr>
-                                        <td class="text-center">{{ $faculty->id }}</td>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $faculty->nama_fakultas }}</td>
                                         <td>
                                             @foreach ($faculty->fakultas as $program)
