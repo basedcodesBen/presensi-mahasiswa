@@ -7,13 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Matakuliah extends Model
 {
+    use HasFactory;
+
     protected $table = 'mata_kuliah';
 
     protected $fillable = [
         'id_matakuliah',
         'nama_matakuliah',
         'kelas',
-        'sks'
+        'sks',
     ];
 
+    public function kehadiran()
+    {
+        return $this->hasMany(Dhmd::class, 'id_matakuliah', 'id_matakuliah');
+    }
 }

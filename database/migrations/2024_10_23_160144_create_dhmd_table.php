@@ -13,6 +13,7 @@ class CreateDhmdTable extends Migration
             $table->dateTime('tanggal');
             $table->string('id_matakuliah', 25);
             $table->integer('pertemuan');
+            $table->string('qr_code')->nullable();
             $table->foreign('id_matakuliah')->references('id_matakuliah')->on('mata_kuliah');
             $table->timestamps();
         });
@@ -21,5 +22,8 @@ class CreateDhmdTable extends Migration
     public function down()
     {
         Schema::dropIfExists('dhmd');
+        Schema::table('dhmd', function (Blueprint $table) {
+            $table->dropColumn('qr_code');
+        });
     }
 }
