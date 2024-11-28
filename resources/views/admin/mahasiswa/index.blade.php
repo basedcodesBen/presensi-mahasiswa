@@ -70,11 +70,11 @@
                                     <td>{{ $student->programStudi->fakultas->nama_fakultas ?? 'N/A' }}</td>
                                     <td>{{ $student->programStudi->program_studi }}</td>
                                     <td>
-                                        <a href="{{ route('admin.mahasiswa.edit', $student->id) }}" class="text-link">Edit</a>
-                                        <form action="{{ route('admin.mahasiswa.destroy', $student->id) }}" method="POST" style="display: inline;">
+                                        <a href="{{ route('admin.mahasiswa.edit', $student->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                        <form action="{{ route('admin.mahasiswa.destroy', $student->id) }}" method="POST" style="display:inline-block;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-link" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>
