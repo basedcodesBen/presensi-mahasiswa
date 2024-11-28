@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class Controller extends BaseController
 {
@@ -27,15 +28,15 @@ class Controller extends BaseController
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            \Log::info('User role: ' . Auth::user()->role_id); // Logging role
+            Log::info('User role: ' . Auth::user()->role_id); // Logging role
             if (Auth::user()->role_id == 1) {
-                \Log::info('Redirect to admin.index'); // Tambahkan log
+                Log::info('Redirect to admin.index'); // Tambahkan log
                 return redirect()->route('admin.index');
             } else if (Auth::user()->role_id == 2) {
-                \Log::info('Redirect to dosen.index');
+                Log::info('Redirect to dosen.index');
                 return redirect()->route('dosen.index');
             } else {
-                \Log::info('Redirect to user.index');
+                Log::info('Redirect to user.index');
                 return redirect()->route('user.index');
             }
         } else {

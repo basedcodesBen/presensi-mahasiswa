@@ -73,14 +73,11 @@
                                     <td>{{ $dosen->email }}</td>
                                     <td>{{ $dosen->programStudi->program_studi }}</td>
                                     <td>
-                                        <!-- Edit Link -->
-                                        <a href="{{ route('admin.dosen.edit', $dosen->id) }}" class="text-link">Edit</a>
-
-                                        <!-- Delete Link -->
-                                        <form action="{{ route('admin.dosen.destroy', $dosen->id) }}" method="POST" style="display: inline;">
+                                        <a href="{{ route('admin.dosen.edit', $dosen->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                        <form action="{{ route('admin.dosen.destroy', $dosen->id) }}" method="POST" style="display:inline-block;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-link" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>
