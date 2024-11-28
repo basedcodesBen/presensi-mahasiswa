@@ -37,4 +37,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(ProgramStudi::class, 'program_studi_id'); // Adjust 'program_studi_id' as per your foreign key
     }
+
+    public function attendances()
+    {
+        return $this->hasMany(Dhmd::class, 'user_nik', 'nik');
+    }
 }
