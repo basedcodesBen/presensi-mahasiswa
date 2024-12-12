@@ -9,10 +9,12 @@ class CreateMataKuliahTable extends Migration
     public function up()
     {
         Schema::create('mata_kuliah', function (Blueprint $table) {
-            $table->string('id_matakuliah', 25)->primary();
+            $table->id();
+            $table->string('kode_matakuliah', 25);
             $table->string('nama_matakuliah', 45);
-            $table->char('kelas', 1);
             $table->integer('sks');
+            $table->unsignedBigInteger('program_studi_id');
+            $table->foreign('program_studi_id')->references('id')->on('program_studi');
             $table->timestamps();
         });
     }

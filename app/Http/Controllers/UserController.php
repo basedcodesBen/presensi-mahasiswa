@@ -11,85 +11,87 @@ use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $users = User::with('role', 'programStudi')->get();
-        return view('users.index', compact('users'));
-    }
+    // public function index()
+    // {
+    //     $users = User::with('role', 'programStudi')->get();
+    //     return view('users.index', compact('users'));
+    // }
 
-    public function create()
-    {
-        $roles = Role::all();
-        $programStudi = ProgramStudi::all();
-        return view('users.create', compact('roles', 'programStudi'));
-    }
+    // public function create()
+    // {
+    //     $roles = Role::all();
+    //     $programStudi = ProgramStudi::all();
+    //     return view('users.create', compact('roles', 'programStudi'));
+    // }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nik' => 'required|unique:users',
-            'nama' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'role_id' => 'required',
-            'program_studi_id' => 'required',
-        ]);
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'nik' => 'required|unique:users',
+    //         'nama' => 'required',
+    //         'email' => 'required|email|unique:users',
+    //         'password' => 'required|min:3',
+    //         'role_id' => 'required',
+    //         'program_studi_id' => 'required',
+    //     ]);
 
-        User::create([
-            'nik' => $request->nik,
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role_id' => $request->role_id,
-            'program_studi_id' => $request->program_studi_id,
-        ]);
+    //     User::create([
+    //         'nik' => $request->nik,
+    //         'nama' => $request->nama,
+    //         'email' => $request->email,
+    //         'password' => Hash::make($request->password),
+    //         'role_id' => $request->role_id,
+    //         'program_studi_id' => $request->program_studi_id,
+    //     ]);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
-    }
+    //     Log::info('Storing new mahasiswa', []);
 
-    public function show($id)
-    {
-        $user = User::with('role', 'programStudi')->findOrFail($id);
-        return view('users.show', compact('user'));
-    }
+    //     return redirect()->route('users.index')->with('success', 'User created successfully.');
+    // }
 
-    public function edit($id)
-    {
-        $user = User::findOrFail($id);
-        $roles = Role::all();
-        $programStudi = ProgramStudi::all();
-        return view('users.edit', compact('user', 'roles', 'programStudi'));
-    }
+    // public function show($id)
+    // {
+    //     $user = User::with('role', 'programStudi')->findOrFail($id);
+    //     return view('users.show', compact('user'));
+    // }
 
-    public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
+    // public function edit($id)
+    // {
+    //     $user = User::findOrFail($id);
+    //     $roles = Role::all();
+    //     $programStudi = ProgramStudi::all();
+    //     return view('users.edit', compact('user', 'roles', 'programStudi'));
+    // }
 
-        $request->validate([
-            'nik' => 'required|unique:users,nik,' . $user->id,
-            'nama' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'role_id' => 'required',
-            'program_studi_id' => 'required',
-        ]);
+    // public function update(Request $request, $id)
+    // {
+    //     $user = User::findOrFail($id);
 
-        $user->update([
-            'nik' => $request->nik,
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'role_id' => $request->role_id,
-            'program_studi_id' => $request->program_studi_id,
-        ]);
+    //     $request->validate([
+    //         'nik' => 'required|unique:users,nik,' . $user->id,
+    //         'nama' => 'required',
+    //         'email' => 'required|email|unique:users,email,' . $user->id,
+    //         'role_id' => 'required',
+    //         'program_studi_id' => 'required',
+    //     ]);
 
-        return redirect()->route('users.index')->with('success', 'User updated successfully.');
-    }
+    //     $user->update([
+    //         'nik' => $request->nik,
+    //         'nama' => $request->nama,
+    //         'email' => $request->email,
+    //         'role_id' => $request->role_id,
+    //         'program_studi_id' => $request->program_studi_id,
+    //     ]);
 
-    public function destroy($id)
-    {
-        $user = User::findOrFail($id);
-        $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
-    }
+    //     return redirect()->route('users.index')->with('success', 'User updated successfully.');
+    // }
+
+    // public function destroy($id)
+    // {
+    //     $user = User::findOrFail($id);
+    //     $user->delete();
+    //     return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+    // }
 
     public function indexDosen(Request $request)
     {
@@ -203,7 +205,7 @@ class UserController extends Controller
             'nik' => $request->nik,
             'nama' => $request->nama,
             'email' => $request->email,
-            'password' => Hash::make('Mahasiswa123'),
+            'password' => Hash::make($request->nik),
             'role_id' => '3',
             'program_studi_id' => $request->program_studi_id,
         ]);

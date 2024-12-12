@@ -11,9 +11,9 @@ class CreateDkbsDetailTable extends Migration
         Schema::create('dkbs_detail', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('dkbs_id');
-            $table->string('id_matakuliah', 25);
             $table->foreign('dkbs_id')->references('id')->on('dkbs');
-            $table->foreign('id_matakuliah')->references('id_matakuliah')->on('mata_kuliah');
+            $table->unsignedBigInteger('id_matakuliah');
+            $table->foreign('id_matakuliah')->references('id')->on('mata_kuliah_detail');
             $table->timestamps();
         });
     }

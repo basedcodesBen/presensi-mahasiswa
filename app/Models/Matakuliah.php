@@ -12,8 +12,8 @@ class Matakuliah extends Model
     protected $fillable = [
         'id_matakuliah',
         'nama_matakuliah',
-        'kelas',
-        'sks'
+        'sks',
+        'program_studi_id'
     ];
 
 }

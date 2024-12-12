@@ -11,9 +11,9 @@ class CreateDhmdTable extends Migration
         Schema::create('dhmd', function (Blueprint $table) {
             $table->id('idpresensi');
             $table->dateTime('tanggal');
-            $table->string('id_matakuliah', 25);
+            $table->unsignedBigInteger('id_matakuliah');
             $table->integer('pertemuan');
-            $table->foreign('id_matakuliah')->references('id_matakuliah')->on('mata_kuliah');
+            $table->foreign('id_matakuliah')->references('id')->on('mata_kuliah');
             $table->timestamps();
         });
     }

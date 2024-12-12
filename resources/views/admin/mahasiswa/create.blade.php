@@ -18,7 +18,7 @@
                             <button type="submit" class="btn btn-primary">Add</button>
                         </div>
                         <div class="mb-3">
-                            <label for="nik" class="form-label">Kode mahasiswa</label>
+                            <label for="nik" class="form-label">NRP Mahasiswa</label>
                             <input type="text" class="form-control" id="nik" name="nik" placeholder="Enter Kode mahasiswa" required>
                         </div>
                         <div class="mb-3">

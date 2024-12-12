@@ -13,7 +13,7 @@
         <ul class="navbar-nav">
             @if(Auth::user()->isAdmin())
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('admin.index') }}">
+                    <a class="nav-link {{ request()->routeIs('admin.index') ? 'active' : '' }}" href="{{ route('admin.index') }}">
                         <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
                         </div>
@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.fakultas.index') }}">
+                    <a class="nav-link {{ request()->routeIs('admin.fakultas.index') ? 'active' : '' }}" href="{{ route('admin.fakultas.index') }}">
                         <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-building text-warning text-sm opacity-10"></i>
                         </div>
@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.mahasiswa.index') }}">
+                    <a class="nav-link {{ request()->routeIs('admin.mahasiswa.index') ? 'active' : '' }}" href="{{ route('admin.mahasiswa.index') }}">
                         <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
                         </div>
@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('dosen.index') ? 'active' : '' }}" href="{{ route('admin.dosen.index') }}">
+                    <a class="nav-link {{ request()->routeIs('admin.dosen.index') ? 'active' : '' }}" href="{{ route('admin.dosen.index') }}">
                         <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
                         </div>
@@ -62,7 +62,7 @@
                 </li>
             @elseif(Auth::user()->isDosen())
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">
+                    <a class="nav-link {{ request()->routeIs('dosen.index') ? 'active' : '' }}" href="#">
                         <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
                         </div>
