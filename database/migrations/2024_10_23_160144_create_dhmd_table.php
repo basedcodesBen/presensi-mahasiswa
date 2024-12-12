@@ -21,5 +21,8 @@ class CreateDhmdTable extends Migration
     public function down()
     {
         Schema::dropIfExists('dhmd');
+        Schema::table('dhmd', function (Blueprint $table) {
+            $table->dropColumn('qr_code');
+        });
     }
 }
