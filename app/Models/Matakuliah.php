@@ -12,13 +12,6 @@ class Matakuliah extends Model
     protected $fillable = [
         'kode_matakuliah',
         'nama_matakuliah',
-<<<<<<< Updated upstream
-        'kelas',
-        'sks'
-    ];
-
-}
-=======
         'sks',
         'program_studi_id' 
 
@@ -34,4 +27,3 @@ class Matakuliah extends Model
         return $this->hasMany(MatakuliahDetail::class, 'matkul_id', 'id');
     }
 }
->>>>>>> Stashed changes

@@ -45,15 +45,12 @@ Route::middleware(['checkRoles:admin'])->group(function () {
 // Route Dosen
 Route::middleware(['checkRoles:dosen'])->group(function () {
     Route::get('/dosen', [Controller::class, 'dosenPage'])->name('dosen.index');
-<<<<<<< Updated upstream
-    Route::get('/dosen/Matakuliah',[DosenController::class, 'index'])->name('dosen.matakuliah');
-=======
+
     Route::get('/dosen/Matakuliah/{nik}',[DosenController::class, 'index'])->name('dosen.matakuliah');
 
     Route::get('/dosen/kehadiran/create', [KehadiranMahasiswaController::class, 'create'])->name('kehadiran.mahasiswa.create');
     Route::post('/dosen/kehadiran', [KehadiranMahasiswaController::class, 'store'])->name('kehadiran.mahasiswa.store');
     Route::get('/dosen/kehadiran/{idpresensi}', [KehadiranMahasiswaController::class, 'show'])->name('kehadiran.mahasiswa.show');
->>>>>>> Stashed changes
 });
 
 Route::middleware(['checkRoles:user'])->group(function () {
