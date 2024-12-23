@@ -35,7 +35,7 @@ class LoginController extends Controller
                 if ($role == 1) {
                     return redirect()->route('admin.index');  // Admin page
                 } elseif ($role == 2) {
-                    return redirect()->route('dosen.page');   // Dosen page
+                    return redirect()->route('dosen.page')->with('user', Auth::user());   // Dosen page
                 } else {
                     return redirect()->route('user.page');    // User page
                 }

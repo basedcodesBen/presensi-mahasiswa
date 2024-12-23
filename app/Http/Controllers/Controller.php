@@ -62,7 +62,10 @@ class Controller extends BaseController
     // Halaman Dosen
     public function dosenPage()
     {
-        return view('dosen.index');
+         $user = Auth::user();
+
+        // Return the view with user data
+        return view('dosen.index', compact('user'));
     }
 
     // Halaman User
