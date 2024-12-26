@@ -9,7 +9,7 @@ class CreateFakultasTable extends Migration
     public function up()
     {
         Schema::create('fakultas', function (Blueprint $table) {
-            $table->string('id', 2)->primary();
+            $table->id();
             $table->string('nama_fakultas', 100);
             $table->timestamps();
         });

@@ -31,14 +31,14 @@
                         </div>
                         <div class="form-group">
                         <label for="program_studi_id">Program Studi</label>
-                        <select name="program_studi_id" id="program_studi_id" class="form-control" required>
-                            @foreach($programStudis as $programStudi)
-                                <option value="{{ $programStudi->id }}">
-                                    {{ $programStudi->program_studi }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                            <select name="program_studi_id" id="program_studi_id" class="form-control" required>
+                                @foreach($programStudis as $programStudi)
+                                    <option value="{{ $programStudi->id }}">
+                                        {{ $programStudi->program_studi }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </form>
                 </div>
             </div>

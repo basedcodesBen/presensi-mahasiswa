@@ -1,15 +1,15 @@
 @extends('layouts.master')
 
-@section('title', 'Data Fakultas')
+@section('title', 'Data Program Studi')
 
 @section('content')
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="m-0">Data Fakultas</h4>
+                    <h4 class="m-0">Data Program Studi</h4>
                     <div class="d-flex justify-content-end">
-                        <a href="{{ route('admin.fakultas.create') }}" class="btn btn-primary">Tambah Fakultas</a>
+                        <a href="{{ route('admin.programstudi.create') }}" class="btn btn-primary">Tambah Program Studi</a>
                     </div>
                     @if(session('success'))
                         <div class="alert alert-success alert-dismissible" role="alert">
@@ -35,24 +35,20 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">ID</th>
-                                    <th>Nama Fakultas</th>
                                     <th>Program Studi</th>
+                                    <th>Fakultas</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($faculties as $faculty)
+                                @foreach ($prodis as $prodi)
                                     <tr>
-                                        <td class="text-center">{{ $faculty->id }}</td>
-                                        <td>{{ $faculty->nama_fakultas }}</td>
+                                        <td class="text-center">{{ $prodi->id }}</td>
+                                        <td>{{ $prodi->program_studi }}</td>
+                                        <td>{{ $prodi->fakultas->nama_fakultas ?? 'N/A' }}</td>
                                         <td>
-                                            @foreach ($faculty->fakultas as $program)
-                                                <span>- {{ $program->program_studi }}</span><br>
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('admin.fakultas.edit', $faculty->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                            <form action="{{ route('admin.fakultas.destroy', $faculty->id) }}" method="POST" style="display:inline-block;">
+                                            <a href="{{ route('admin.programstudi.edit', $prodi->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                            <form action="{{ route('admin.programstudi.destroy', $prodi->id) }}" method="POST" style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>

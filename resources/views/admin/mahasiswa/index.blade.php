@@ -3,28 +3,6 @@
 @section('title', 'Data Mahasiswa')
 
 @section('content')
-
-    <style>
-        .text-link {
-            background: none;
-            border: none;
-            color: #6c757d;
-            text-decoration: underline;
-            cursor: pointer;
-            font-size: inherit;
-            padding: 0;
-            outline: none;
-        }
-
-        .text-link:hover {
-            color: #495057;
-        }
-
-        .text-link + .text-link {
-            margin-left: 10px;
-        }
-    </style>
-
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -34,6 +12,23 @@
                     <div class="d-flex justify-content-end">
                         <a href="{{ route('admin.mahasiswa.create') }}" class="btn btn-primary">Tambah Data</a>
                     </div>
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background: none; border: none;">
+                                <i class="ni ni-fat-remove opacity-100" style="font-size: 1.25rem;"></i>
+                            </button>
+                        </div>
+                    @endif
+
+                    @if(session('danger'))
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            {{ session('danger') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background: none; border: none;">
+                                <i class="ni ni-fat-remove opacity-100" style="font-size: 1.25rem;"></i>
+                            </button>
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body">
 
@@ -55,8 +50,8 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th class="text-center">NRP</th>
                                     <th>Nama</th>
-                                    <th>NRP</th>
                                     <th>Fakultas</th>
                                     <th>Program Studi</th>
                                     <th>Aksi</th>
@@ -65,8 +60,8 @@
                             <tbody>
                             @foreach ($students as $student)
                                 <tr>
+                                    <td class="text-center">{{ $student->nik }}</td>
                                     <td>{{ $student->nama }}</td>
-                                    <td>{{ $student->nik }}</td>
                                     <td>{{ $student->programStudi->fakultas->nama_fakultas ?? 'N/A' }}</td>
                                     <td>{{ $student->programStudi->program_studi }}</td>
                                     <td>

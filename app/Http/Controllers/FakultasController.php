@@ -20,32 +20,20 @@ class FakultasController extends Controller
 
     public function create()
     {
-        $roles = Role::all();
-        $programStudi = ProgramStudi::all();
-        return view('users.create', compact('roles', 'programStudi'));
+        return view('admin.fakultas.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nik' => 'required|unique:users',
             'nama' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'role_id' => 'required',
-            'program_studi_id' => 'required',
         ]);
 
-        User::create([
-            'nik' => $request->nik,
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role_id' => $request->role_id,
-            'program_studi_id' => $request->program_studi_id,
+        Fakultas::create([
+            'nama_fakultas' => $request->nama,
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('admin.fakultas.index')->with('success', 'Fakultas created successfully.');
     }
 
     public function show($id)
@@ -56,39 +44,29 @@ class FakultasController extends Controller
 
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        $roles = Role::all();
-        $programStudi = ProgramStudi::all();
-        return view('users.edit', compact('user', 'roles', 'programStudi'));
+        $fakultas = Fakultas::findOrFail($id);
+        return view('admin.fakultas.edit', compact('fakultas'));
     }
 
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $fakultas = Fakultas::findOrFail($id);
 
         $request->validate([
-            'nik' => 'required|unique:users,nik,' . $user->id,
             'nama' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'role_id' => 'required',
-            'program_studi_id' => 'required',
         ]);
 
-        $user->update([
-            'nik' => $request->nik,
-            'nama' => $request->nama,
-            'email' => $request->email,
-            'role_id' => $request->role_id,
-            'program_studi_id' => $request->program_studi_id,
+        $fakultas->update([
+            'nama_fakultas' => $request->nama,
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User updated successfully.');
+        return redirect()->route('admin.fakultas.index')->with('success', 'Fakultas updated successfully.');
     }
 
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        $fakultas = Fakultas::findOrFail($id);
+        $fakultas->delete();
+        return redirect()->route('admin.fakultas.index')->with('danger', 'Fakultas deleted successfully.');
     }
 }

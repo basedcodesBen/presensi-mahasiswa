@@ -34,6 +34,23 @@
                     <div class="d-flex justify-content-end">
                         <a href="{{ route('admin.dosen.create') }}" class="btn btn-primary">Tambah Data</a>
                     </div>
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background: none; border: none;">
+                                <i class="ni ni-fat-remove opacity-100" style="font-size: 1.25rem;"></i>
+                            </button>
+                        </div>
+                    @endif
+
+                    @if(session('danger'))
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            {{ session('danger') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background: none; border: none;">
+                                <i class="ni ni-fat-remove opacity-100" style="font-size: 1.25rem;"></i>
+                            </button>
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body">
 
@@ -58,7 +75,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>NIK</th>
+                                    <th class="text-center">NIK</th>
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>Program Studi</th>
@@ -68,7 +85,7 @@
                             <tbody>
                             @foreach ($dosens as $dosen)
                                 <tr>
-                                    <td>{{ $dosen->nik }}</td>
+                                    <td class="text-center">{{ $dosen->nik }}</td>
                                     <td>{{ $dosen->nama }}</td>
                                     <td>{{ $dosen->email }}</td>
                                     <td>{{ $dosen->programStudi->program_studi }}</td>

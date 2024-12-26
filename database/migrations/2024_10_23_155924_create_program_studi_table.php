@@ -11,7 +11,7 @@ class CreateProgramStudiTable extends Migration
         Schema::create('program_studi', function (Blueprint $table) {
             $table->id();
             $table->string('program_studi', 45);
-            $table->string('fakultas_id', 2);
+            $table->unsignedBigInteger('fakultas_id');
             $table->foreign('fakultas_id')->references('id')->on('fakultas');
             $table->timestamps();
         });

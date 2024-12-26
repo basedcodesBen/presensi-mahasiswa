@@ -1,7 +1,7 @@
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start" id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href="#">
+        <a class="navbar-brand m-0" href="{{ route('admin.index') }}">
             <img src="{{ asset('assets/img/logo-ct-dark.png') }}" class="navbar-brand-img h-100" alt="logo">
             <span class="ms-1 font-weight-bold">
                 {{ Auth::user()->role->nama_role ?? 'Dashboard' }} Dashboard
@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link {{ request()->routeIs('admin.programstudi.index') ? 'active' : '' }}" href="{{ route('admin.programstudi.index') }}">
                         <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-briefcase-24 text-warning text-sm opacity-10"></i>
                         </div>
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link {{ request()->routeIs('admin.matakuliah.index') ? 'active' : '' }}" href="{{ route('admin.matakuliah.index') }}">
                         <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-ungroup text-warning text-sm opacity-10"></i>
                         </div>

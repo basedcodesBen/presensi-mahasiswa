@@ -11,7 +11,7 @@
                 <h4 class="m-0">Edit Data Mahasiswa</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.mahasiswa.update', $mahasiswa->id) }}" method="POST">
+                <form action="{{ route('admin.fakultas.update', $fakultas->id) }}" method="POST">
                     @csrf
                     @method('PUT')
 
@@ -42,7 +42,7 @@
                     </div>
                     
                     <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <a href="{{ route('admin.mahasiswa.index') }}" class="btn btn-secondary">Cancel</a>
+                    <a href="{{ route('admin.fakultas.index') }}" class="btn btn-secondary">Cancel</a>
                 </form>
             </div>
         </div>

@@ -8,7 +8,10 @@ class ProgramStudi extends Model
 {
     protected $table = 'program_studi';
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'program_studi',
+        'fakultas_id'
+    ];
 
     public function users()
     {
@@ -18,5 +21,10 @@ class ProgramStudi extends Model
     public function fakultas()
     {
         return $this->belongsTo(Fakultas::class, 'fakultas_id');
+    }
+
+    public function matkul()
+    {
+        return $this->hasMany(Matakuliah::class, 'id');
     }
 }

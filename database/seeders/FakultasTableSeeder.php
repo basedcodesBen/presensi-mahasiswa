@@ -16,12 +16,12 @@ class FakultasTableSeeder extends Seeder
     {
         // Insert fakultas into the fakultas table with numeric IDs
         DB::table('fakultas')->insert([
-            ['id' => 1, 'nama_fakultas' => 'Fakultas Kedokteran'],
-            ['id' => 2, 'nama_fakultas' => 'Fakultas Teknologi dan Rekayasa Cerdas'],
-            ['id' => 3, 'nama_fakultas' => 'Fakultas Psikologi'],
-            ['id' => 4, 'nama_fakultas' => 'Fakultas Humaniora dan Industri Kreatif'],
-            ['id' => 5, 'nama_fakultas' => 'Fakultas Hukum dan Bisnis Digital'],
-            ['id' => 6, 'nama_fakultas' => 'Fakultas Kedokteran Gigi'],
+            ['nama_fakultas' => 'Fakultas Kedokteran'],
+            ['nama_fakultas' => 'Fakultas Teknologi dan Rekayasa Cerdas'],
+            ['nama_fakultas' => 'Fakultas Psikologi'],
+            ['nama_fakultas' => 'Fakultas Humaniora dan Industri Kreatif'],
+            ['nama_fakultas' => 'Fakultas Hukum dan Bisnis Digital'],
+            ['nama_fakultas' => 'Fakultas Kedokteran Gigi'],
         ]);
     }
 }

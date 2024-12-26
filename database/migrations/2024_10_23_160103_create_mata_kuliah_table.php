@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('user_nik', 7);
             $table->foreign('user_nik')->references('nik')->on('users');
             $table->string('kelas', 1);
+            $table->timestamps();
         });
     }
 

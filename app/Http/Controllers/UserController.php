@@ -170,7 +170,7 @@ class UserController extends Controller
         $dosen = User::findOrFail($id);
         $dosen->delete();
         Log::info('Dosen deleted, redirecting to index');
-        return redirect()->route('admin.dosen.index')->with('success', 'Dosen deleted successfully.');
+        return redirect()->route('admin.dosen.index')->with('danger', 'Dosen deleted successfully.');
     }
 
     public function indexMahasiswa(Request $request)
@@ -250,7 +250,7 @@ class UserController extends Controller
         $mahasiswa = User::findOrFail($id);
         $mahasiswa->delete();
         Log::info('Mahasiswa deleted, redirecting to index');
-        return redirect()->route('admin.mahasiswa.index')->with('success', 'Mahasiswa deleted successfully.');
+        return redirect()->route('admin.mahasiswa.index')->with('danger', 'Mahasiswa deleted successfully.');
     }
 
 }
