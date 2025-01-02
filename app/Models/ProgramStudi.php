@@ -8,7 +8,11 @@ class ProgramStudi extends Model
 {
     protected $table = 'program_studi';
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'program_studi'
+    ];
+
+    protected $primaryKey = 'id';
 
     public function users()
     {
