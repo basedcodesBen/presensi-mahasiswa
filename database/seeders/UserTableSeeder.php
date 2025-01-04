@@ -5,66 +5,73 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Faker\Factory as Faker;
+
 
 class UserTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        // Insert users into the user table
-        DB::table('users')->insert([
+        $faker = Faker::create();
+
+        $users = [
             [
-                'nik' => '1234567',
-                'nama' => 'Admin User',
+                'nik' => '1',
+                'nama' => 'Admin',
                 'email' => 'admin@example.com',
-                'password' => Hash::make('password'), // Password harus di-hash
+                'password' => Hash::make('1'),
                 'role_id' => 1, // Role Admin
-                'program_studi_id' => '1', // Contoh program studi
+                'program_studi_id' => 3,
             ],
-            [
-                'nik' => 'qwe',
-                'nama' => 'Admin User',
-                'email' => 'qwe@example.com',
-                'password' => Hash::make('qwe'), // Password harus di-hash
+        ];
+
+        $fakultasProgramStudi = [
+            1 => [1, 2],
+            2 => [3, 4, 5],
+            3 => [6],
+            4 => [7, 8],
+            5 => [9, 10],
+            6 => [11]
+        ];
+
+        for ($i = 0; $i < 4; $i++) {
+            $users[] = [
+                'nik' => '10' . $faker->unique()->numerify('##'),
+                'nama' => $faker->name,
+                'email' => $faker->unique()->safeEmail,
+                'password' => Hash::make('admin'), // Password harus di-hash
                 'role_id' => 1, // Role Admin
-                'program_studi_id' => '1', // Contoh program studi
-            ],
-            [
-                'nik' => '2345678',
-                'nama' => 'Dosen User',
-                'email' => 'dosen@example.com',
-                'password' => Hash::make('password'), // Password harus di-hash
-                'role_id' => 2, // Role Dosen
-                'program_studi_id' => '2', // Contoh program studi
-            ],
-            [
-                'nik' => 'asd',
-                'nama' => 'Dosen User',
-                'email' => 'asd@example.com',
-                'password' => Hash::make('asd'), // Password harus di-hash
-                'role_id' => 2, // Role Dosen
-                'program_studi_id' => '2', // Contoh program studi
-            ],
-            [
-                'nik' => '3456789',
-                'nama' => 'Mahasiswa User',
-                'email' => 'mahasiswa@example.com',
-                'password' => Hash::make('password'), // Password harus di-hash
-                'role_id' => 3, // Role Mahasiswa
-                'program_studi_id' => '3', // Contoh program studi
-            ],
-            [
-                'nik' => '123',
-                'nama' => 'Mahasiswa User',
-                'email' => '123@example.com',
-                'password' => Hash::make('123'), // Password harus di-hash
-                'role_id' => 3, // Role Mahasiswa
-                'program_studi_id' => '3', // Contoh program studi
-            ],
-        ]);
+                'program_studi_id' => 2,
+            ];
+        }
+
+        foreach ($fakultasProgramStudi as $fakultasId => $programStudiIds) {
+            foreach ($programStudiIds as $programStudiId) {
+                for ($i = 0; $i < 2; $i++) {
+                    $users[] = [
+                        'nik' => $fakultasId . $programStudiId . '0' . $faker->unique()->numerify('##'),
+                        'nama' => $faker->name,
+                        'email' => $faker->unique()->safeEmail,
+                        'password' => Hash::make('dosen'), // Password harus di-hash
+                        'role_id' => 2, // Role Dosen
+                        'program_studi_id' => $programStudiId, // Specific program studi
+                    ];
+                }
+
+                // Create 10 Mahasiswa users
+                for ($i = 0; $i < 5; $i++) {
+                    $users[] = [
+                        'nik' => $fakultasId . $programStudiId . '0' . $faker->unique()->numerify('##'),
+                        'nama' => $faker->name,
+                        'email' => $faker->unique()->safeEmail,
+                        'password' => Hash::make('mahasiswa'), // Password harus di-hash
+                        'role_id' => 3, // Role Mahasiswa
+                        'program_studi_id' => $programStudiId, // Specific program studi
+                    ];
+                }
+            }
+        }
+
+        DB::table('users')->insert($users);
     }
 }

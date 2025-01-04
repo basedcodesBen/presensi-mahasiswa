@@ -68,14 +68,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($matakuliah as $mk)
+                            @forelse($matakuliah as $mk)
                                 <tr>
                                     <td class="text-center">{{ $mk->kode_matakuliah }}</td>
                                     <td>{{ $mk->nama_matakuliah }}</td>
                                     <td class="text-center">{{ $mk->sks }}</td>
                                     <td>
                                         <a href="{{ route('admin.matakuliah.matkuldetail', ['fakultas' => $fakultas->id, 'prodi' => $programStudi->id, 'matkul' => $mk->id]) }}" class="btn btn-primary ">
-                                            View Dosen
+                                            View Class
                                         </a>
                                         <a href="{{ route('admin.matakuliah.edit', ['fakultas' => $fakultas->id, 'prodi' => $programStudi->id, 'matkul' => $mk->id]) }}" class="btn btn-warning ">
                                             Edit
@@ -87,7 +87,11 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center">No data available</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>

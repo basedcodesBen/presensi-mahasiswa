@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Dhmd::class, 'user_nik', 'nik');
     }
+    
+    public function dkbs()
+    {
+        return $this->hasMany(DKBS::class, 'user_nik', 'nik');
+    }
 }

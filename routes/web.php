@@ -55,11 +55,17 @@ Route::middleware(['checkRoles:admin'])->group(function () {
     Route::get('/admin/matakuliah', [MataKuliahController::class, 'index'])->name('admin.matakuliah.index');
     Route::post('/admin/matakuliah/{fakultas}/{prodi}', [MataKuliahController::class, 'storeMatkul'])->name('admin.matakuliah.store');
     Route::post('/admin/matakuliah/{fakultas}/{prodi}/{matkul}', [MataKuliahController::class, 'storeDosen'])->name('admin.matakuliah.storeDosen');
+    Route::post('/admin/matakuliah/{fakultas}/{prodi}/{matkul}/{kelas}', [MataKuliahController::class, 'storeMahasiswa'])->name('admin.matakuliah.storeMahasiswa');
     Route::get('/admin/matakuliah/{fakultas}/{prodi}/create', [MatakuliahController::class, 'createMatkul'])->name('admin.matakuliah.create');
     Route::get('/admin/matakuliah/{fakultas}/{prodi}/{matkul}/create', [MatakuliahController::class, 'createDosen'])->name('admin.matakuliah.createdosen');
+    Route::get('/admin/matakuliah/{fakultas}/{prodi}/{matkul}/{kelas}/add', [MatakuliahController::class, 'addMahasiswa'])->name('admin.matakuliah.addmahasiswa');
     Route::get('/admin/matakuliah/{fakultas}/{prodi}/{matkul}/edit', [MataKuliahController::class, 'editMatkul'])->name('admin.matakuliah.edit');
+    Route::get('/admin/matakuliah/{fakultas}/{prodi}/{matkul}/{kelas}/edit', [MataKuliahController::class, 'editClass'])->name('admin.matakuliah.editkelas');
     Route::put('/admin/matakuliah/{fakultas}/{prodi}/{matkul}', [MataKuliahController::class, 'updateMatkul'])->name('admin.matakuliah.update');
+    Route::put('/admin/matakuliah/{fakultas}/{prodi}/{matkul}/{kelas}', [MataKuliahController::class, 'updateKelas'])->name('admin.matakuliah.updatekelas');
     Route::delete('/admin/matakuliah/{fakultas}/{prodi}/{matkul}', [MataKuliahController::class, 'destroyMatkul'])->name('admin.matakuliah.destroy');
+    Route::delete('/admin/matakuliah/{fakultas}/{prodi}/{matkul}/{dosen}', [MataKuliahController::class, 'destroyDosen'])->name('admin.matakuliah.destroyDosen');
+    Route::delete('/admin/matakuliah/{fakultas}/{prodi}/{matkul}/{kelas}/{mahasiswa}', [MataKuliahController::class, 'destroyMahasiswa'])->name('admin.matakuliah.destroyMahasiswa');
     Route::get('/admin/matakuliah/{fakultas}', [MataKuliahController::class, 'fakultasDetail'])->name('admin.matakuliah.fakultasdetail');
     Route::get('/admin/matakuliah/{fakultas}/{prodi}', [MataKuliahController::class, 'prodiDetail'])->name('admin.matakuliah.prodidetail');
     Route::get('/admin/matakuliah/{fakultas}/{prodi}/{matkul}', [MataKuliahController::class, 'matkulDetail'])->name('admin.matakuliah.matkuldetail');

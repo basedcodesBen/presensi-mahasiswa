@@ -1,4 +1,4 @@
-@extends('layouts.dosen.master')
+@extends('layouts.master')
 
 @section('title', 'Attendance Details')
 

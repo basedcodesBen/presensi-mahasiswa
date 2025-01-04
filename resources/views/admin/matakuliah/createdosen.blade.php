@@ -30,11 +30,13 @@
                         <h4 class="m-3">{{ $mk->kode_matakuliah }} - {{ $mk->nama_matakuliah }}</h4>
                         <label for="dosen">Dosen</label>
                         <select name="dosen" id="dosen" class="form-control" required>
-                            @foreach($dosen as $d)
+                            @forelse($dosen as $d)
                                 <option value="{{ $d->nik }}">
                                     {{ $d->nik }} - {{ $d->nama }}
                                 </option>
-                            @endforeach
+                            @empty
+                                <option value="">Tidak Ada Dosen Aktif</option>
+                            @endforelse
                         </select>
                         <label for="kelas">Kelas</label>
                         <select name="kelas" id="kelas" class="form-control" required>

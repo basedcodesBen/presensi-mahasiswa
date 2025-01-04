@@ -13,7 +13,7 @@ class CreateDhmdTable extends Migration
             $table->dateTime('tanggal');
             $table->unsignedBigInteger('id_matakuliah');
             $table->integer('pertemuan');
-            $table->foreign('id_matakuliah')->references('id')->on('mata_kuliah');
+            $table->foreign('id_matakuliah')->references('id')->on('mata_kuliah_detail');
             $table->timestamps();
         });
     }

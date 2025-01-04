@@ -17,8 +17,26 @@ class MatkulSeeder extends Seeder
     {
         Matakuliah::insert([
             [
-                'kode_matakuliah' => 'IN001',
+                'kode_matakuliah' => 'IN285',
                 'nama_matakuliah' => 'Pemrograman Multipatform',
+                'sks' => 3,
+                'program_studi_id' => 3
+            ],
+            [
+                'kode_matakuliah' => 'IN210',
+                'nama_matakuliah' => 'Jaringan Komputer',
+                'sks' => 3,
+                'program_studi_id' => 3
+            ],
+            [
+                'kode_matakuliah' => 'IN211',
+                'nama_matakuliah' => 'Logika Informatika',
+                'sks' => 3,
+                'program_studi_id' => 3
+            ],
+            [
+                'kode_matakuliah' => 'IN212',
+                'nama_matakuliah' => 'Web Dasar',
                 'sks' => 3,
                 'program_studi_id' => 3
             ],
@@ -26,12 +44,6 @@ class MatkulSeeder extends Seeder
                 'kode_matakuliah' => 'MK001',
                 'nama_matakuliah' => 'Bahasa Inggris',
                 'sks' => 2,
-                'program_studi_id' => 3
-            ],
-            [
-                'kode_matakuliah' => 'IN210',
-                'nama_matakuliah' => 'Jaringan Komputer',
-                'sks' => 3,
                 'program_studi_id' => 3
             ],
             [

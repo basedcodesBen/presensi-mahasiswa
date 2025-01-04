@@ -10,6 +10,7 @@ class MataKuliahDetail extends Model
     use HasFactory;
 
     protected $table = 'mata_kuliah_detail';
+    public $mahasiswa_count;
 
     protected $fillable = [
         'matkul_id',
@@ -17,11 +18,18 @@ class MataKuliahDetail extends Model
         'kelas',
     ];
 
-    public function mataKuliah(){
-        return $this->belongsTo(Matakuliah::class, 'id', 'matkul_id');
+    public function mataKuliah()
+    {
+        return $this->belongsTo(Matakuliah::class, 'matkul_id', 'id');
     }
 
-    public function dosen(){
-        return $this->belongsTo(User::class, 'nik', 'users_nik');
+    public function dosen()
+    {
+        return $this->belongsTo(User::class, 'user_nik', 'nik');
+    }
+
+    public function mahasiswa()
+    {
+        return $this->hasMany(DKBS::class, 'id_matakuliah', 'id');
     }
 }
