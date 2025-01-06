@@ -18,10 +18,10 @@ class Matakuliah extends Model
         'program_studi_id'
     ];
 
-    public function kehadiran()
-    {
-        return $this->hasMany(Dhmd::class, 'id_matakuliah', 'id_matakuliah');
+    public function kehadiran(){
+        return $this->hasMany(Dhmd::class, 'id_matakuliah', 'id');
     }
+
 
     public function prodi(){
         return $this->belongsTo(ProgramStudi::class, 'id', 'program_studi_id');

@@ -42,7 +42,7 @@ Route::middleware(['checkRoles:admin'])->group(function () {
     Route::post('/admin/dosen', [UserController::class, 'storeDosen'])->name('admin.dosen.store');
     Route::get('/admin/dosen/{dosen}/edit', [UserController::class, 'editDosen'])->name('admin.dosen.edit');
     Route::put('/admin/dosen/{dosen}', [UserController::class, 'updateDosen'])->name('admin.dosen.update');
-    Route::delete('/admin/dosen/{id}', [UserController::class, 'destroyDosen'])->name('admin.dosen.destroy'); 
+    Route::delete('/admin/dosen/{id}', [UserController::class, 'destroyDosen'])->name('admin.dosen.destroy');
     
     // Route Mahasiswa Management
     Route::get('/admin/mahasiswa', [UserController::class, 'indexMahasiswa'])->name('admin.mahasiswa.index');
@@ -75,6 +75,11 @@ Route::middleware(['checkRoles:admin'])->group(function () {
 Route::middleware(['checkRoles:dosen'])->group(function () {
     Route::get('/dosen', [Controller::class, 'dosenPage'])->name('dosen.index');
     Route::get('/dosen/Matakuliah',[DosenController::class, 'index'])->name('dosen.matakuliah');
+    Route::get('/dosen/matakuliah/{id_matakuliah}', [DosenController::class, 'detail'])->name('dosen.matakuliah.detail');
+    Route::get('/dosen/matakuliah/{id_matakuliah}/pertemuan/{id_presensi}', [DosenController::class, 'pertemuanDetail'])->name('dosen.matakuliah.pertemuan');
+
+
+
 
     Route::get('/dosen/kehadiran/create', [KehadiranMahasiswaController::class, 'create'])->name('kehadiran.mahasiswa.create');
     Route::post('/dosen/kehadiran', [KehadiranMahasiswaController::class, 'store'])->name('kehadiran.mahasiswa.store');
