@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Dhmd;
 use App\Models\MataKuliah;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Models\QrCode;
+use SimpleSoftwareIO\QrCode\Facades\QrCode as QRCodeGenerator;
+use Carbon\Carbon;
 
 class KehadiranMahasiswaController extends Controller
 {
@@ -35,11 +37,18 @@ class KehadiranMahasiswaController extends Controller
             'id_matakuliah' => $kehadiran->id_matakuliah,
             'tanggal' => $kehadiran->tanggal,
         ]);
+        $uniqueCode = uniqid(); // Generate unique QR code
+        $expiredAt = Carbon::now()->addMinutes(5);
+
+        QrCode::create([
+            'code' => $uniqueCode,
+            'expired_at' => $expiredAt,
+        ]);
 
         $qrCodePath = 'qrcodes/' . $kehadiran->idpresensi . '.png';
-        \SimpleSoftwareIO\QrCode\Facades\QrCode::format('png')->size(300)->generate($qrData, public_path($qrCodePath));
+        QRCodeGenerator::format('png')->size(300)->generate($uniqueCode, public_path($qrCodePath));
 
-        $kehadiran->update(['qr_code' => $qrCodePath]);
+        $kehadiran->update(attributes: ['qr_code' => $qrCodePath]);
 
         return redirect()->route('kehadiran.mahasiswa.show', ['idpresensi' => $kehadiran->idpresensi]);
     }
@@ -48,6 +57,6 @@ class KehadiranMahasiswaController extends Controller
     public function show($idpresensi)
     {
         $kehadiran = Dhmd::with('mataKuliah')->findOrFail($idpresensi);
-        return view('dosen.kehadiran.show', compact('kehadiran'));
+        return view('dosen.kehadiran.show', compact('kehadiran', ''));
     }
 }
