@@ -27,8 +27,7 @@ class KehadiranMahasiswaController extends Controller
             'tanggal' => 'required|date',
             'pertemuan' => 'required|integer|min:1',
         ]);
-        $idmatkul = $request->id;
-        $pertemuan = $request->pertemuan;
+
         $uniqueCode = uniqid(); // Generate unique QR code
         $expiredAt = Carbon::now()->addMinutes(5);
         $kehadiran = Dhmd::create([
@@ -39,7 +38,7 @@ class KehadiranMahasiswaController extends Controller
         // Generate QR code data
         $qrData = json_encode([
             'idpresensi' => $kehadiran->idpresensi,
-            'id_matakuliah' => $kehadiran->id,
+            'id_matakuliah' => $kehadiran->id_matakuliah,
             'tanggal' => $kehadiran->tanggal,
             'uniqueCode' => $uniqueCode,
         ]);
@@ -61,6 +60,7 @@ class KehadiranMahasiswaController extends Controller
             ->size(300) // Set size
             ->build();
         $result->saveToFile($fullPath);
+        
         $kehadiran->update(attributes: ['qr_code' => $qrCodePath]);
         return redirect()->route('kehadiran.mahasiswa.show', ['idpresensi' => $kehadiran->idpresensi]);
     }
@@ -77,22 +77,14 @@ class KehadiranMahasiswaController extends Controller
         return view('user.scan');
     }
 
-    public function presensi(Request $request)
+    public function presensi(Request $request, $idpresensi)
     {
-        // Validate the incoming JSON data
-        $validatedData = $request->validate([
-            'idpresensi' => 'required|integer',
-            'id_matakuliah' => 'required|integer',
-            'tanggal' => 'required|date',
-            'uniqueCode' => 'required|string',
+        $uniqueCode = $request->query('uniqueCode');
+        $tanggal = $request->query('tanggal');
+
+        return response()->json([
+            'idpresensi' => $idpresensi,
+            'uniqueCode' => $uniqueCode,
         ]);
-
-        // Process the decoded QR data
-        $idpresensi = $validatedData['idpresensi'];
-        $idMatakuliah = $validatedData['id_matakuliah'];
-        $tanggal = $validatedData['tanggal'];
-        $uniqueCode = $validatedData['uniqueCode'];
-
-        
     }
 }

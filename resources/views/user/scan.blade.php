@@ -91,31 +91,8 @@
                                 tanggal,
                                 uniqueCode,
                             });
+                            window.location.href = `/user/presensi/${idpresensi}?uniqueCode=${uniqueCode}`;
 
-                            // Send the data to the backend via POST
-                            const response = await fetch('/user/presensi', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                                },
-                                body: JSON.stringify({
-                                    idpresensi,
-                                    id_matakuliah: idMatakuliah,
-                                    tanggal,
-                                    uniqueCode,
-                                }),
-                            });
-
-                            if (!response.ok) {
-                                throw new Error('Failed to send QR data to the backend');
-                            }
-
-                            const result = await response.json();
-                            console.log('Backend response:', result);
-
-                            // Handle success (e.g., redirect or display a message)
-                            alert('QR Code processed successfully!');
                         } catch (error) {
                             console.error("Error processing QR Code:", error.message);
                         }

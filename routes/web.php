@@ -84,6 +84,6 @@ Route::middleware(['checkRoles:dosen'])->group(function () {
 Route::middleware(['checkRoles:user'])->group(function () {
     Route::get('/user', [Controller::class, 'userPage'])->name('user.index');
     Route::get('/user/QrScanner',[KehadiranMahasiswaController::class,'scan'])->name('user.scanner');
-    Route::post('/user/presensi', [KehadiranMahasiswaController::class, 'presensi'])->name('user.presensi');
+    Route::get('/user/presensi/{data}', [KehadiranMahasiswaController::class, 'presensi'])->name('user.presensi');
 
 });
