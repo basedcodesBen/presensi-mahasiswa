@@ -14,7 +14,7 @@ class CreateDhmdTable extends Migration
             $table->unsignedBigInteger('id_matakuliah');
             $table->integer('pertemuan');
             $table->foreign('id_matakuliah')->references('id')->on('mata_kuliah_detail');
-            $table->string('qr_code');
+            $table->string('qr_code')->default('');
             $table->timestamps();
         });
     }

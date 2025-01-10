@@ -14,9 +14,9 @@
                 @csrf
                 <div class="mb-3">
                     <label for="id_matakuliah" class="form-label">Course</label>
-                    <select name="id_matakuliah" id="id_matakuliah" class="form-select">
+                    <select name="id" id="id_matakuliah" class="form-select">
                         @foreach($courses as $course)
-                            <option value="{{ $course->id_matakuliah }}">{{ $course->nama_matakuliah }} ({{ $course->id_matakuliah }})</option>
+                            <option value="{{ $course->id }}">{{ $course->nama_matakuliah }} ({{ $course->id_matakuliah }})</option>
                         @endforeach
                     </select>
                 </div>
