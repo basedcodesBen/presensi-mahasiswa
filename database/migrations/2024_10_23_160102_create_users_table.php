@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email', 255)->unique();
             $table->string('password', 255);
             $table->unsignedBigInteger('role_id');
-            $table->string('program_studi_id', 2);
+            $table->unsignedBigInteger('program_studi_id');
             $table->foreign('role_id')->references('id')->on('role');
             $table->foreign('program_studi_id')->references('id')->on('program_studi');
             $table->timestamps();

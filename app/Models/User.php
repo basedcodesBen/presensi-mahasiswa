@@ -9,7 +9,6 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $fillable = [
-        'id',
         'nik',
         'nama',
         'email',
@@ -27,19 +26,33 @@ class User extends Authenticatable
     {
         return $this->role_id == 2;
     }
+    public function isUser()
+    {
+        return $this->role_id == 3;
+    }
 
     public function role()
     {
-        return $this->belongsTo(Role::class, 'role_id'); // Ensure this relationship is correct
+        return $this->belongsTo(Role::class, 'role_id');
     }
 
     public function programStudi()
     {
-        return $this->belongsTo(ProgramStudi::class, 'program_studi_id'); // Adjust 'program_studi_id' as per your foreign key
+        return $this->belongsTo(ProgramStudi::class, 'program_studi_id');
+    }
+
+    public function dosen()
+    {
+        return $this->hasMany(MataKuliahDetail::class, 'user_nik', 'nik');
     }
 
     public function attendances()
     {
         return $this->hasMany(Dhmd::class, 'user_nik', 'nik');
+    }
+    
+    public function dkbs()
+    {
+        return $this->hasMany(DKBS::class, 'user_nik', 'nik');
     }
 }

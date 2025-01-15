@@ -26,7 +26,7 @@ class LoginController extends Controller
 
         // Attempt to authenticate the user using 'nik' and 'password'
         if (Auth::attempt(['nik' => $request->nik, 'password' => $request->password], $request->filled('remember'))) {
-            \Log::info('Login Berhasil');
+            //Log::info('Login Berhasil');
             // Authentication passed, redirect to the intended page
             if (Auth::check()) {
                 $role = Auth::user()->role_id;

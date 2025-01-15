@@ -1,4 +1,4 @@
-@extends('layouts.dosen.master')
+@extends('layouts.master')
 
 @section('title', 'Dosen')
 
@@ -21,7 +21,6 @@
             </div>
 
             @if($matakuliah->isNotEmpty())
-                <!-- Show table only if there is data -->
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -36,8 +35,8 @@
                     <tbody>
                         @foreach($matakuliah as $mk)
                         <tr>
-                            <td class="text-center">{{ $mk->nama_matakuliah }}</td>
-                            <td class="text-center">{{ $mk->id_matakuliah }}</td>
+                            <td class="text-center">{{ $mk->mataKuliah->nama_matakuliah }}</td>
+                            <td class="text-center">{{ $mk->mataKuliah->kode_matakuliah }}</td>
                             <td class="text-center">{{ $mk->kelas }}</td>
                             <td class="text-center">{{ $mk->pertemuan }}</td>
                             <td class="text-center">{{ $mk->jumlah_mahasiswa }}</td>
@@ -48,10 +47,6 @@
                 </table>
             @endif
 
-
-            <div class="d-flex mt-4">
-                {{ $matakuliah->links() }}
-            </div>
         </div>
     </div>
 </div>

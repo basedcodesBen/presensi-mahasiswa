@@ -12,14 +12,22 @@ class Matakuliah extends Model
     protected $table = 'mata_kuliah';
 
     protected $fillable = [
-        'id_matakuliah',
+        'kode_matakuliah',
         'nama_matakuliah',
-        'kelas',
         'sks',
+        'program_studi_id'
     ];
 
     public function kehadiran()
     {
         return $this->hasMany(Dhmd::class, 'id_matakuliah', 'id_matakuliah');
+    }
+
+    public function prodi(){
+        return $this->belongsTo(ProgramStudi::class, 'id', 'program_studi_id');
+    }
+
+    public function mataKuliah(){
+        return $this->hasMany(MataKuliahDetail::class, 'matkul_id', 'id');
     }
 }

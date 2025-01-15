@@ -18,7 +18,7 @@
                             <button type="submit" class="btn btn-primary">Add</button>
                         </div>
                         <div class="mb-3">
-                            <label for="nik" class="form-label">Kode mahasiswa</label>
+                            <label for="nik" class="form-label">NRP Mahasiswa</label>
                             <input type="text" class="form-control" id="nik" name="nik" placeholder="Enter Kode mahasiswa" required>
                         </div>
                         <div class="mb-3">
@@ -31,14 +31,14 @@
                         </div>
                         <div class="form-group">
                         <label for="program_studi_id">Program Studi</label>
-                        <select name="program_studi_id" id="program_studi_id" class="form-control" required>
-                            @foreach($programStudis as $programStudi)
-                                <option value="{{ $programStudi->id }}">
-                                    {{ $programStudi->program_studi }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                            <select name="program_studi_id" id="program_studi_id" class="form-control" required>
+                                @foreach($programStudis as $programStudi)
+                                    <option value="{{ $programStudi->id }}">
+                                        {{ $programStudi->program_studi }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </form>
                 </div>
             </div>

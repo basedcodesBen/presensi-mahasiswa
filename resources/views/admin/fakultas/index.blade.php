@@ -11,13 +11,30 @@
                     <div class="d-flex justify-content-end">
                         <a href="{{ route('admin.fakultas.create') }}" class="btn btn-primary">Tambah Fakultas</a>
                     </div>
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background: none; border: none;">
+                                <i class="ni ni-fat-remove opacity-100" style="font-size: 1.25rem;"></i>
+                            </button>
+                        </div>
+                    @endif
+
+                    @if(session('danger'))
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            {{ session('danger') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background: none; border: none;">
+                                <i class="ni ni-fat-remove opacity-100" style="font-size: 1.25rem;"></i>
+                            </button>
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th class="text-center">No</th>
+                                    <th class="text-center">ID</th>
                                     <th>Nama Fakultas</th>
                                     <th>Program Studi</th>
                                     <th>Aksi</th>
@@ -26,7 +43,7 @@
                             <tbody>
                                 @foreach ($faculties as $faculty)
                                     <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td class="text-center">{{ $faculty->id }}</td>
                                         <td>{{ $faculty->nama_fakultas }}</td>
                                         <td>
                                             @foreach ($faculty->fakultas as $program)

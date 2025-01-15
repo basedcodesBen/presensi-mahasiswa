@@ -22,6 +22,6 @@ class Dhmd extends Model
 
     public function mataKuliah()
     {
-        return $this->belongsTo(Matakuliah::class, 'id_matakuliah', 'id_matakuliah');
+        return $this->belongsTo(Matakuliah::class, 'id_matakuliah', 'id');
     }
 }
