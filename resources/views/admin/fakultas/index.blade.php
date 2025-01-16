@@ -11,23 +11,6 @@
                     <div class="d-flex justify-content-end">
                         <a href="{{ route('admin.fakultas.create') }}" class="btn btn-primary">Tambah Fakultas</a>
                     </div>
-                    @if(session('success'))
-                        <div class="alert alert-success alert-dismissible" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background: none; border: none;">
-                                <i class="ni ni-fat-remove opacity-100" style="font-size: 1.25rem;"></i>
-                            </button>
-                        </div>
-                    @endif
-
-                    @if(session('danger'))
-                        <div class="alert alert-danger alert-dismissible" role="alert">
-                            {{ session('danger') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background: none; border: none;">
-                                <i class="ni ni-fat-remove opacity-100" style="font-size: 1.25rem;"></i>
-                            </button>
-                        </div>
-                    @endif
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -55,7 +38,7 @@
                                             <form action="{{ route('admin.fakultas.destroy', $faculty->id) }}" method="POST" style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                                <button type="button" class="btn btn-danger btn-sm" id="delete">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -67,4 +50,7 @@
             </div>
         </div>
     </div>
+    @include('layouts.confirm')
+    @include('layouts.alerts')
+
 @endsection

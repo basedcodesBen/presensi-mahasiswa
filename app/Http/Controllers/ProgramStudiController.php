@@ -14,15 +14,15 @@ use Illuminate\Support\Facades\Log;
 class ProgramStudiController extends Controller
 {
     public function index()
-    {   
+    {
         return view('admin.programstudi.index', [
-            'prodis' => ProgramStudi::all(),
+            'prodis' => ProgramStudi::paginate(10),
             'fakultas' => Fakultas::all()
         ]);
     }
 
     public function create()
-    {   
+    {
         return view('admin.programstudi.create', [
             'fakultas' => Fakultas::all()
         ]);
@@ -58,7 +58,7 @@ class ProgramStudiController extends Controller
             'program_studi' => 'required',
             'fakultas_id' => 'required',
         ]);
-        
+
         $prodi->update([
             'nama_fakultas' => $request->nama,
             'fakultas_id' => $request->fakultas_id,
@@ -69,8 +69,12 @@ class ProgramStudiController extends Controller
 
     public function destroy($id)
     {
-        $prodi = ProgramStudi::findOrFail($id);
-        $prodi->delete();
-        return redirect()->route('admin.programstudi.index')->with('danger', 'Program Studi deleted successfully.');
+        try{
+            $prodi = ProgramStudi::findOrFail($id);
+            $prodi->delete();
+            return redirect()->route('admin.programstudi.index')->with('success', 'Program Studi deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.programstudi.index')->with('danger', 'Data Program Studi gagal dihapus.');
+        }
     }
 }

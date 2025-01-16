@@ -65,8 +65,13 @@ class FakultasController extends Controller
 
     public function destroy($id)
     {
-        $fakultas = Fakultas::findOrFail($id);
-        $fakultas->delete();
-        return redirect()->route('admin.fakultas.index')->with('danger', 'Fakultas deleted successfully.');
+        try {
+            $faculty = Fakultas::findOrFail($id);
+            $faculty->delete();
+
+            return redirect()->route('admin.fakultas.index')->with('success', 'Data Fakultas berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.fakultas.index')->with('danger', 'Data Fakultas gagal dihapus.');
+        }
     }
 }

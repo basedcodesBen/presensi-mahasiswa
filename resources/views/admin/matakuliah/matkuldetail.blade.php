@@ -12,27 +12,6 @@
                         <a href="{{ route('admin.matakuliah.createdosen',  ['fakultas' => $fakultas->id, 'prodi' => $programStudi->id, 'matkul' => $matkul->id]) }}" class="btn btn-primary m-2">Tambah Dosen</a>
                         <a href="{{ route('admin.matakuliah.prodidetail',  ['fakultas' => $fakultas->id, 'prodi' => $programStudi->id]) }}" class="btn btn-danger m-2">Kembali</a>
                     </div>
-                    @if(session('success'))
-                        <div class="alert alert-success alert-dismissible" role="alert">
-                            <li class="text-light font-weight-bold">
-                                {{ session('success') }}
-                            </li>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background: none; border: none;">
-                                <i class="ni ni-fat-remove opacity-100" style="font-size: 1.25rem;"></i>
-                            </button>
-                        </div>
-                    @endif
-
-                    @if(session('danger'))
-                        <div class="alert alert-danger alert-dismissible" role="alert">
-                            <li class="text-light font-weight-bold">
-                                {{ session('danger') }}
-                            </li>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background: none; border: none;">
-                                <i class="ni ni-fat-remove opacity-100" style="font-size: 1.25rem;"></i>
-                            </button>
-                        </div>
-                    @endif
                 </div>
                 <div class="card-body">                    
                     <h4 class="m-0">{{ $matkul->kode_matakuliah }} - {{ $matkul->nama_matakuliah }}</h4>
@@ -59,7 +38,7 @@
                                             <form action="{{ route('admin.matakuliah.destroyDosen', ['fakultas' => $fakultas->id, 'prodi' => $programStudi->id, 'matkul' => $matkul->id, 'dosen' => $detail->id]) }}" method="POST" style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                                <button type="submit" class="btn btn-danger" id="delete">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -75,4 +54,6 @@
             </div>
         </div>
     </div>
+    @include('layouts.confirm')
+    @include('layouts.alerts')
 @endsection
