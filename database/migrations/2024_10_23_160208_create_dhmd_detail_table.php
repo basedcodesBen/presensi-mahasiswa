@@ -14,6 +14,7 @@ class CreateDhmdDetailTable extends Migration
             $table->string('status', 100);
             $table->foreign('dhmd_idpresensi')->references('idpresensi')->on('dhmd');
             $table->foreign('user_nik')->references('nik')->on('users');
+            $table->string('Image',200);
             $table->timestamps();
         });
     }

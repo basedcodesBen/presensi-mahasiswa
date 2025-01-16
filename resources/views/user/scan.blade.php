@@ -12,15 +12,15 @@
         </select>
     </div>
     <div class="container mt-5 text-center">
-        @if(session('error'))
+         @if(request('error'))
             <div class="alert alert-danger">
-                {{ session('error') }}
+                {{ request('error') }}
             </div>
         @endif
 
-        @if(session('message'))
+        @if(request('message'))
             <div class="alert alert-success">
-                {{ session('message') }}
+                {{ request('message') }}
             </div>
         @endif
     </div>
@@ -34,6 +34,8 @@
 
     <!-- Custom JavaScript -->
     <script>
+
+
         document.addEventListener('DOMContentLoaded', function () {
             // Ensure Html5Qrcode library is loaded
             if (typeof Html5Qrcode === 'undefined') {

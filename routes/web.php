@@ -75,6 +75,8 @@ Route::middleware(['checkRoles:admin'])->group(function () {
 Route::middleware(['checkRoles:dosen'])->group(function () {
     Route::get('/dosen', [Controller::class, 'dosenPage'])->name('dosen.index');
     Route::get('/dosen/Matakuliah',[DosenController::class, 'index'])->name('dosen.matakuliah');
+    Route::get('/dosen/matakuliah/{id_matakuliah}', [DosenController::class, 'detail'])->name('dosen.matakuliah.detail');
+    Route::get('/dosen/matakuliah/{id_matakuliah}/pertemuan/{id_presensi}', [DosenController::class, 'pertemuanDetail'])->name('dosen.matakuliah.pertemuan');
 
     Route::get('/dosen/kehadiran/create', [KehadiranMahasiswaController::class, 'create'])->name('kehadiran.mahasiswa.create');
     Route::post('/dosen/kehadiran', [KehadiranMahasiswaController::class, 'store'])->name('kehadiran.mahasiswa.store');
@@ -85,5 +87,5 @@ Route::middleware(['checkRoles:user'])->group(function () {
     Route::get('/user', [Controller::class, 'userPage'])->name('user.index');
     Route::get('/user/QrScanner',[KehadiranMahasiswaController::class,'scan'])->name('user.scanner');
     Route::get('/user/presensi/{data}', [KehadiranMahasiswaController::class, 'presensi'])->name('user.presensi');
-
+    Route::post('/save-attendance-photo', [KehadiranMahasiswaController::class, 'savePhoto'])->name('user.save');
 });
