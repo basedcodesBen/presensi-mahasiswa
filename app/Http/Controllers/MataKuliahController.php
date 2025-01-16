@@ -243,11 +243,11 @@ class MataKuliahController extends Controller
         try {
             $mk = Matakuliah::findOrFail($matkul);
             $mk->delete();
-            return redirect()->route('admin.matakuliah.prodidetail', ['fakultas' => $fakultas, 'prodi' => $prodi])->with('danger', 'Mata Kuliah deleted successfully.');
+            return redirect()->route('admin.matakuliah.prodidetail', ['fakultas' => $fakultas, 'prodi' => $prodi])->with('success', 'Mata Kuliah deleted successfully.');
         
         } catch (QueryException $e) {
             if ($e->getCode() === '23000') {
-                return redirect()->back()->with('error', 'Mata Kuliah masih memiliki Dosen Aktif.');
+                return redirect()->back()->with('danger', 'Mata Kuliah masih memiliki Dosen Aktif.');
             }
 
             throw $e;
@@ -259,11 +259,11 @@ class MataKuliahController extends Controller
         try {
             $mk = MataKuliahDetail::findOrFail($dosen);
             $mk->delete();
-            return redirect()->route('admin.matakuliah.matkuldetail', ['fakultas' => $fakultas, 'prodi' => $prodi, 'matkul' => $matkul])->with('danger', 'Dosen deleted successfully.');
+            return redirect()->route('admin.matakuliah.matkuldetail', ['fakultas' => $fakultas, 'prodi' => $prodi, 'matkul' => $matkul])->with('success', 'Dosen deleted successfully.');
         
         } catch (QueryException $e) {
             if ($e->getCode() === '23000') {
-                return redirect()->back()->with('error', 'Dosen gagal dihapus.');
+                return redirect()->back()->with('danger', 'Dosen gagal dihapus.');
             }
 
             throw $e;
@@ -281,7 +281,7 @@ class MataKuliahController extends Controller
                 ->with('success', 'Mahasiswa berhasil dihapus.');
         } catch (QueryException $e) {
             if ($e->getCode() === '23000') {
-                return redirect()->back()->with('error', 'Mahasiswa gagal dihapus.');
+                return redirect()->back()->with('danger', 'Mahasiswa gagal dihapus.');
             }
 
             throw $e;

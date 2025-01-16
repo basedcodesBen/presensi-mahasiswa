@@ -167,10 +167,14 @@ class UserController extends Controller
 
     public function destroyDosen($id)
     {
-        $dosen = User::findOrFail($id);
-        $dosen->delete();
-        Log::info('Dosen deleted, redirecting to index');
-        return redirect()->route('admin.dosen.index')->with('danger', 'Dosen deleted successfully.');
+        try {
+            $dosen = User::findOrFail($id);
+            $dosen->delete();
+            Log::info('Dosen deleted, redirecting to index');
+            return redirect()->route('admin.dosen.index')->with('success', 'Dosen deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.dosen.index')->with('danger', 'Error deleting dosen.');
+        }
     }
 
     public function indexMahasiswa(Request $request)
@@ -247,10 +251,14 @@ class UserController extends Controller
 
     public function destroyMahasiswa($id)
     {
-        $mahasiswa = User::findOrFail($id);
-        $mahasiswa->delete();
-        Log::info('Mahasiswa deleted, redirecting to index');
-        return redirect()->route('admin.mahasiswa.index')->with('danger', 'Mahasiswa deleted successfully.');
+        try{
+            $mahasiswa = User::findOrFail($id);
+            $mahasiswa->delete();
+            Log::info('Mahasiswa deleted, redirecting to index');
+            return redirect()->route('admin.mahasiswa.index')->with('success', 'Mahasiswa deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.mahasiswa.index')->with('danger', 'Error deleting mahasiswa.');
+        }
     }
 
 }

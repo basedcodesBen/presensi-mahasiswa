@@ -69,8 +69,12 @@ class ProgramStudiController extends Controller
 
     public function destroy($id)
     {
-        $prodi = ProgramStudi::findOrFail($id);
-        $prodi->delete();
-        return redirect()->route('admin.programstudi.index')->with('danger', 'Program Studi deleted successfully.');
+        try{
+            $prodi = ProgramStudi::findOrFail($id);
+            $prodi->delete();
+            return redirect()->route('admin.programstudi.index')->with('success', 'Program Studi deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.programstudi.index')->with('danger', 'Data Program Studi gagal dihapus.');
+        }
     }
 }

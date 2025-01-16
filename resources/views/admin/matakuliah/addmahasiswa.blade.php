@@ -9,26 +9,6 @@
                 <div class="card-header">
                     <h4 class="m-0">Data Kelas</h4>
                     <p>Tambah data Mahasiswa disini</p>
-                    @if($errors->any())
-                        <div class="alert alert-danger alert-dismissible" role="alert">
-                            @foreach($errors->all() as $error)
-                                    <li class="text-light font-weight-bold">{{ $error }}</li>
-                                @endforeach
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background: none; border: none;">
-                                <i class="ni ni-fat-remove opacity-100" style="font-size: 1.25rem;"></i>
-                            </button>
-                        </div>
-                    @endif
-                    @if(session('success'))
-                        <div class="alert alert-success alert-dismissible" role="alert">
-                            <li class="text-light font-weight-bold">
-                                {{ session('success') }}
-                            </li>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background: none; border: none;">
-                                <i class="ni ni-fat-remove opacity-100" style="font-size: 1.25rem;"></i>
-                            </button>
-                        </div>
-                    @endif
                 </div>
                 <div class="card-body">
                     <h4 class="m-3">{{ $mk->kode_matakuliah }} - {{ $mk->nama_matakuliah }}</h4>
@@ -59,7 +39,7 @@
                                             <form action="{{  route('admin.matakuliah.destroyMahasiswa', ['fakultas' => $faculty->id, 'prodi' => $programStudi->id, 'matkul' => $mk->id, 'kelas' => $class->id, 'mahasiswa' => $mhs->user_nik]) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                                <button type="submit" class="btn btn-danger"id="delete">Hapus</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -91,4 +71,6 @@
             </div>
         </div>
     </div>
+    @include('layouts.confirm')
+    @include('layouts.alerts')
 @endsection
