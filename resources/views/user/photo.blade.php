@@ -24,7 +24,7 @@
             <video id="video" width="640" height="480" autoplay></video>
             <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
             <button id="capture">Capture Photo</button>
-            <form id="photoForm" action={{route('user.save')}}" method="POST" enctype="multipart/form-data">
+            <form id="photoForm" action="{{ route('user.save') }}" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="idPresensi" id="idPresensi" value="{{$dhmd->idpresensi}}">
                 <input type="file" name="photo" id="photoInput" style="display:none;">
                 <button type="submit" style="display:none;" id="submitPhoto">Submit Photo</button>
@@ -60,9 +60,12 @@
             // Set the file input with the image blob
             const file = new File([imageBlob], "attendance_photo.png", { type: 'image/png' });
             const formData = new FormData(photoForm);
-            formData.set('photo', file); // Append the photo file
+            formData.set('photo', file);
             formData.set('idPresensi', document.getElementById('idPresensi').value);
-
+            console.log(document.getElementById('idPresensi').value)
+            for (var pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
             // Submit the form with the image data
             fetch('/save-attendance-photo', {
                 method: 'POST',
@@ -71,13 +74,18 @@
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 }
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Server error: ' + response.status);
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.redirect_url) {
                     // Handle redirect using JavaScript
                     window.location.href = data.redirect_url;
                 } else {
-                    console.log(data.message);
+                    console.log(data);
                 }
             })
             .catch(error => {

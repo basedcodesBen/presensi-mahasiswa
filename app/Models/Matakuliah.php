@@ -20,7 +20,7 @@ class Matakuliah extends Model
 
     public function kehadiran()
     {
-        return $this->hasMany(Dhmd::class, 'id_matakuliah', 'id_matakuliah');
+        return $this->hasMany(Dhmd::class, 'id_matakuliah', 'id');
     }
 
     public function prodi(){

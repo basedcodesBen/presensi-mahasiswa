@@ -3,8 +3,8 @@
 @section('title', 'Dosen')
 
 @section('content')
-<div class="col-lg-12"">
-    <div class="card shadow-sm ">
+<div class="col-lg-12">
+    <div class="card shadow-sm">
         <div class="card-header bg-white">
             <h5>Data Matakuliah</h5>
             <p class="mb-0">A lightweight, extendable, dependency-free JavaScript HTML table plugin.</p>
@@ -20,7 +20,7 @@
                 </select>
             </div>
 
-            @if($matakuliah->isNotEmpty())
+            @if($matakuliahData->isNotEmpty())
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -33,20 +33,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($matakuliah as $mk)
+                        @foreach($matakuliahData as $data)
                         <tr>
-                            <td class="text-center">{{ $mk->mataKuliah->nama_matakuliah }}</td>
-                            <td class="text-center">{{ $mk->mataKuliah->kode_matakuliah }}</td>
-                            <td class="text-center">{{ $mk->kelas }}</td>
-                            <td class="text-center">{{ $mk->pertemuan }}</td>
-                            <td class="text-center">{{ $mk->jumlah_mahasiswa }}</td>
-                            <td class="text-center"><a href="#" class="btn btn-link">View Detail</a></td>
+                            <td class="text-center">{{ $data['nama_matakuliah'] }}</td>
+                            <td class="text-center">{{ $data['kode_matakuliah'] }}</td>
+                            <td class="text-center">{{ $data['kelas'] }}</td>
+                            <td class="text-center">{{ $data['total_pertemuan'] }}</td>
+                            <td class="text-center">{{ $data['jumlah_mahasiswa'] }}</td>
+                            <td class="text-center">
+                                <a href="{{route('dosen.matakuliah.detail', $data['id_matakuliah'])}}" class="btn btn-link">View Detail</a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
+            @else
+                <p class="text-center">Tidak ada data matakuliah.</p>
             @endif
-
         </div>
     </div>
 </div>

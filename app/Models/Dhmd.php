@@ -14,6 +14,7 @@ class Dhmd extends Model
     protected $primaryKey = "idpresensi";
 
     protected $fillable = [
+        'idpresensi',
         'tanggal',
         'id_matakuliah',
         'pertemuan',

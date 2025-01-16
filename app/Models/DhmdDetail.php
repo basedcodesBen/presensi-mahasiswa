@@ -14,7 +14,8 @@ class DhmdDetail extends Model
     protected $fillable = [
         'dhmd_idpresensi',
         'user_nik',
-        'status'
+        'status',
+        'Image'
     ];
 
     public function idPresensi()

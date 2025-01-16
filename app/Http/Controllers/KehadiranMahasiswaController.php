@@ -144,6 +144,7 @@ class KehadiranMahasiswaController extends Controller
         }
         if ($request->hasFile('photo')) {
             // Process and save the photo
+            
             $file = $request->file('photo');
             $fileName = 'attendance_' . time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('images/attendance'), $fileName); // Save to the public/images/attendance folder
@@ -153,7 +154,7 @@ class KehadiranMahasiswaController extends Controller
                     'dhmd_idpresensi' => $request->idPresensi,
                     'user_nik' => Auth::User()->nik,
                     'status' => 'hadir',
-                    'image' => $filePath
+                    'Image' => $filePath
                 ]
             );
             // Return success response
